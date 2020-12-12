@@ -1,6 +1,6 @@
-[![CircleCI](https://circleci.com/gh/angular/angular-bazel-example.svg?style=svg)](https://circleci.com/gh/angular/angular-bazel-example)
-
 # Example Angular monorepo using Bazel
+
+This example is a copy of the canonical Bazel [demo](https://github.com/bazelbuild/rules_nodejs/tree/8e7653629bb843d8b48f94a1e4284936d191c881/examples/angular).
 
 There are a few ways to use Angular with Bazel. See https://bazelbuild.github.io/rules_nodejs/examples#angular for an overview of all the options.
 
