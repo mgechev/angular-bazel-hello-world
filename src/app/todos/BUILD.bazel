@@ -1,0 +1,32 @@
+load("@io_bazel_rules_sass//:defs.bzl", "sass_binary")
+load("//tools:angular_ts_library.bzl", "ng_ts_library")
+
+package(default_visibility = ["//:__subpackages__"])
+
+sass_binary(
+    name = "todos-styles",
+    src = "todos.component.scss",
+)
+
+ng_ts_library(
+    name = "todos",
+    srcs = [
+        "todos.component.ts",
+        "todos.module.ts",
+    ],
+    angular_assets = [
+        "todos.component.html",
+        ":todos-styles",
+    ],
+    tsconfig = "//src:tsconfig.json",
+    deps = [
+        "//src/app/todos/reducers",
+        "//src/shared/material",
+        "@npm//@angular/common",
+        "@npm//@angular/core",
+        "@npm//@angular/forms",
+        "@npm//@angular/router",
+        "@npm//@ngrx/store",
+        "@npm//rxjs",
+    ],
+)
