@@ -1,3 +1,4 @@
 dist
 bazel-*
 node_modules
+.bazelrc.user

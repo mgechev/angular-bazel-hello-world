@@ -140,12 +140,12 @@ build:remote_base --disk_cache=
 
 # Remote instance and caching
 build:remote --config=remote_base
-build:remote --remote_executor=grpcs://rbe.stg.flare.build
-build:remote --remote_cache=grpcs://rbe.stg.flare.build
+build:remote --remote_executor=grpcs://cache.stg.flare.build
+build:remote --remote_cache=grpcs://cache.stg.flare.build
 
 build:remote_local --config=remote_base
-# build:remote_local --remote_cache=grpc://localhost:8001
-build:remote_local --remote_executor=grpc://localhost:8001
+build:remote_local --remote_cache=grpc://localhost:8002
+build:remote_local --remote_executor=grpc://localhost:8002
 build:remote_local --remote_header=Authorization=local_flare
 
 # Load any settings specific to the current user.
