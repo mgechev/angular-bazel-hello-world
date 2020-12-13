@@ -103,29 +103,6 @@ build:remote_base --jobs=150
 build:remote_base --cpu=k8
 build:remote_base --host_cpu=k8
 
-# Toolchain and platform related flags
-# (copied from angular/angular; uses platform defined in //tools, and has issues to fix)
-# build:remote_base --host_javabase=@rbe_ubuntu1604_angular//java:jdk
-# build:remote_base --javabase=@rbe_ubuntu1604_angular//java:jdk
-# build:remote_base --host_java_toolchain=@bazel_tools//tools/jdk:toolchain_hostjdk8
-# build:remote_base --java_toolchain=@bazel_tools//tools/jdk:toolchain_hostjdk8
-# build:remote_base --crosstool_top=@rbe_ubuntu1604_angular//cc:toolchain
-# build:remote_base --extra_toolchains=@rbe_ubuntu1604_angular//config:cc-toolchain
-# build:remote_base --extra_execution_platforms=//tools:rbe_ubuntu1604-angular
-# build:remote_base --host_platform=//tools:rbe_ubuntu1604-angular
-# build:remote_base --platforms=//tools:rbe_ubuntu1604-angular
-
-# reference bazel 2.0.0 rbe config, would need to add these repos to workspace
-# build:remote_base --host_javabase=@rbe_ubuntu1604_java8//java:jdk
-# build:remote_base --javabase=@rbe_ubuntu1604_java8//java:jdk
-# build:remote_base --host_java_toolchain=@bazel_tools//tools/jdk:toolchain_hostjdk8
-# build:remote_base --java_toolchain=@bazel_tools//tools/jdk:toolchain_hostjdk8
-# build:remote_base --crosstool_top=@rbe_ubuntu1604_java8//cc:toolchain
-# build:remote_base --extra_toolchains=@rbe_ubuntu1604_java8//config:cc-toolchain
-# build:remote_base --extra_execution_platforms=@rbe_ubuntu1604_java8//config:platform
-# build:remote_base --host_platform=@rbe_ubuntu1604_java8//config:platform
-# build:remote_base --platforms=@rbe_ubuntu1604_java8//config:platform
-
 # current flare config
 build:remote_base --action_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
 build:remote_base --host_javabase=@ubuntu2004-rbe//java:jdk
@@ -135,16 +112,18 @@ build:remote_base --extra_toolchains=@ubuntu2004-rbe//config:cc-toolchain
 build:remote_base --extra_execution_platforms=@ubuntu2004-rbe//config:platform
 build:remote_base --host_platform=@ubuntu2004-rbe//config:platform
 build:remote_base --platforms=@ubuntu2004-rbe//config:platform
-
 build:remote_base --disk_cache=
+build:remote_base --spawn_strategy=remote,local
+build:remote_base --experimental_inmemory_jdeps_files
+build:remote_base --experimental_inmemory_dotd_files
 
 # Remote instance and caching
 build:remote --config=remote_base
 build:remote --remote_executor=grpcs://cache.stg.flare.build
-build:remote --remote_cache=grpcs://cache.stg.flare.build
+#build:remote --remote_cache=grpcs://cache.stg.flare.build
 
 build:remote_local --config=remote_base
-build:remote_local --remote_cache=grpc://localhost:8002
+#build:remote_local --remote_cache=grpc://localhost:8002
 build:remote_local --remote_executor=grpc://localhost:8002
 build:remote_local --remote_header=Authorization=local_flare
 
