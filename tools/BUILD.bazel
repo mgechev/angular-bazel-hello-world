@@ -13,3 +13,23 @@ nodejs_binary(
     entry_point = "@npm//:node_modules/@bazel/typescript/internal/tsc_wrapped/tsc_wrapped.js",
     visibility = ["//:__subpackages__"],
 )
+
+platform(
+    name = "rbe_ubuntu1604-angular",
+    parents = ["@rbe_ubuntu1604_angular//config:platform"],
+    remote_execution_properties = """
+        {PARENT_REMOTE_EXECUTION_PROPERTIES}
+        properties: {
+            name: "dockerAddCapabilities"
+            value: "SYS_ADMIN"
+        }
+        properties: {
+            name: "dockerNetwork"
+            value: "standard"
+        }
+        properties: {
+            name: "Pool"
+            value: "default"
+        }
+        """,
+)
