@@ -281,7 +281,7 @@ nodejs_image(
     binary = ":prodserver",
     # Actions created by this rule are I/O-bound,
     # so there is no benefit to running them remotely
-    tags = ["local"],
+    tags = ["local", "manual"],
 )
 
 container_image(
@@ -289,7 +289,7 @@ container_image(
     base = ":nodejs_image",
     # Actions created by this rule are I/O-bound,
     # so there is no benefit to running them remotely
-    tags = ["local"],
+    tags = ["local",  "manual"],
 )
 
 ts_library(

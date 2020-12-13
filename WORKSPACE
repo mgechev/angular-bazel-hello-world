@@ -81,23 +81,20 @@ load("@io_bazel_rules_sass//sass:sass_repositories.bzl", "sass_repositories")
 
 sass_repositories()
 
-################################
-# Support for Remote Execution #
-################################
-
+# other deps
 http_archive(
-    name = "bazel_toolchains",
-    sha256 = "8c9728dc1bb3e8356b344088dfd10038984be74e1c8d6e92dbb05f21cabbb8e4",
-    strip_prefix = "bazel-toolchains-3.7.1",
+    name = "io_bazel_rules_go",
+    sha256 = "207fad3e6689135c5d8713e5a17ba9d1290238f47b9ba545b63d9303406209c6",
     urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/bazel-toolchains/releases/download/3.7.1/bazel-toolchains-3.7.1.tar.gz",
-        "https://github.com/bazelbuild/bazel-toolchains/releases/download/3.7.1/bazel-toolchains-3.7.1.tar.gz",
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.24.7/rules_go-v0.24.7.tar.gz",
+        "https://github.com/bazelbuild/rules_go/releases/download/v0.24.7/rules_go-v0.24.7.tar.gz",
     ],
 )
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
 
-####################################################
-# Support creating Docker images for our node apps #
-####################################################
+go_rules_dependencies()
+
+go_register_toolchains()
 
 http_archive(
     name = "io_bazel_rules_docker",
@@ -117,6 +114,11 @@ container_deps()
 load("@io_bazel_rules_docker//repositories:pip_repositories.bzl", "pip_deps")
 
 pip_deps()
+
+# https://github.com/bazelbuild/rules_docker#go_image
+load("@io_bazel_rules_docker//go:image.bzl", _go_image_repos = "repositories")
+
+_go_image_repos()
 
 load("@io_bazel_rules_docker//nodejs:image.bzl", nodejs_image_repos = "repositories")
 
@@ -159,6 +161,9 @@ k8s_defaults(
 
 http_archive(
     name = "bazel_toolchains",
+    patches = [
+        "//:patches/com_github_bazelbuild_bazel_toolchains.diff"
+    ],
     sha256 = "8c9728dc1bb3e8356b344088dfd10038984be74e1c8d6e92dbb05f21cabbb8e4",
     strip_prefix = "bazel-toolchains-3.7.1",
     urls = [
@@ -187,6 +192,7 @@ load("@flare_toolchains//configs/ubuntu2004_clang:repo.bzl", "ubuntu2004_clang_t
 rbe_autoconfig(
     name = "ubuntu2004-rbe",
     toolchain_config_suite_spec = ubuntu2004_clang_toolchain_config_suite_spec,
+    os_family = "Linux",
 )
 
 ## end Flare FBE

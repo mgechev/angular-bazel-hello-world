@@ -130,7 +130,7 @@ build:remote_base --host_cpu=k8
 build:remote_base --action_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
 build:remote_base --host_javabase=@ubuntu2004-rbe//java:jdk
 build:remote_base --javabase=@ubuntu2004-rbe//java:jdk
-build:remote_base --crosstool_top=@llvm_toolchain//:toolchain
+build:remote_base --crosstool_top=@ubuntu2004-rbe//cc:toolchain
 build:remote_base --extra_toolchains=@ubuntu2004-rbe//config:cc-toolchain
 build:remote_base --extra_execution_platforms=@ubuntu2004-rbe//config:platform
 build:remote_base --host_platform=@ubuntu2004-rbe//config:platform
@@ -144,8 +144,8 @@ build:remote --remote_executor=grpcs://rbe.stg.flare.build
 build:remote --remote_cache=grpcs://rbe.stg.flare.build
 
 build:remote_local --config=remote_base
-build:remote_local --remote_cache=grpc://localhost:8002
-build:remote_local --remote_executor=grpc://localhost:8002
+# build:remote_local --remote_cache=grpc://localhost:8001
+build:remote_local --remote_executor=grpc://localhost:8001
 build:remote_local --remote_header=Authorization=local_flare
 
 # Load any settings specific to the current user.

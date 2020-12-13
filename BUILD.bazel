@@ -18,6 +18,7 @@ k8s_deploy(
         "gcr.io/internal-200822/src:nodejs_image": "//src:image",
     },
     template = ":deployment.yaml",
+    tags = ["manual"],
 )
 
 # Just a dummy test so that we have a test target for //... on certain bazelci platforms with bazel_integration_test
