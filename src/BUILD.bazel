@@ -267,6 +267,7 @@ ngsw_config(
     name = "pwa",
     out = "pwa_out",
     src = ":prodapp",
+    tags = ["local", "manual"],
     config = "//src:ngsw-config.json",
     index_html = ":inject_scripts_for_prod",
 )
