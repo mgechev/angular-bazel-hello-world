@@ -265,7 +265,9 @@ pkg_web(
 
 ngsw_config(
     name = "pwa",
+    out = "pwa_out",
     src = ":prodapp",
+    tags = ["local", "manual"],
     config = "//src:ngsw-config.json",
     index_html = ":inject_scripts_for_prod",
 )
@@ -281,7 +283,7 @@ nodejs_image(
     binary = ":prodserver",
     # Actions created by this rule are I/O-bound,
     # so there is no benefit to running them remotely
-    tags = ["local"],
+    tags = ["local", "manual"],
 )
 
 container_image(
@@ -289,7 +291,7 @@ container_image(
     base = ":nodejs_image",
     # Actions created by this rule are I/O-bound,
     # so there is no benefit to running them remotely
-    tags = ["local"],
+    tags = ["local",  "manual"],
 )
 
 ts_library(
